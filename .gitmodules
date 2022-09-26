@@ -1,0 +1,3 @@
+[submodule "qdpi/3ob"]
+	path = qdpi/3ob
+	url = https://github.com/dftbparams/3ob
