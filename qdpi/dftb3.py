@@ -7,7 +7,7 @@ from ase.calculators.dftb import Dftb
 @Driver.register('dftb3')
 class DFTB3Driver(Driver.get_driver("ase")):
     """DFTB3 3ob driven by DFTB+."""
-    def __init__(self) -> None:
+    def __init__(self, charge: int = 0) -> None:
         # disable OpenMP, which makes DFTB+ slower
         os.environ['OMP_NUM_THREADS'] = '1'
         slko_dir = os.path.join(os.path.dirname(__file__), '3ob', 'skfiles')
@@ -24,6 +24,9 @@ class DFTB3Driver(Driver.get_driver("ase")):
             Hamiltonian_HCorrection_='',
             Hamiltonian_HCorrection_Damping_='',
             Hamiltonian_HCorrection_Damping_Exponent=4.0,
+            Hamiltonian_charge=charge,
+            Hamiltonian_MaxSCCIterations=200,
             slako_dir=os.path.join(slko_dir, ''),
+            Hamiltonian_Solver='MAGMA{}',
         )
         super().__init__(calc)
