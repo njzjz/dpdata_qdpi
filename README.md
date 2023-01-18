@@ -9,10 +9,12 @@
 ## Installation
 
 ```sh
-pip install dpdata_qdpi
+pip install dpdata_qdpi[gpu]
+# or for the CPU version of TensorFlow
+pip install dpdata_qdpi[cpu]
 ```
 
-You need to install either [AMBERTools](ambermd.org/) SQM (`sqm`) or [DFTB+](https://github.com/dftbplus/dftbplus/) (`dftb+`).
+At this time, you need to install either [AMBERTools](ambermd.org/) SQM (`sqm`) or [DFTB+](https://github.com/dftbplus/dftbplus/) (`dftb+`).
 
 ## Usage
 
@@ -27,6 +29,7 @@ qdpi = QDPiDriver(
     backend="sqm",
 )
 ```
+`backend` can be either `sqm` or `dftb+`.
 
 Assume you have an XYZ file `ch4.xyz`
 
