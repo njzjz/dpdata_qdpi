@@ -1,24 +1,29 @@
 [build-system]
-requires = ["setuptools>=61.0.0", "wheel"]
+requires = ["setuptools>=61.0.0", "wheel", "setuptools_scm[toml]>=6.0.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "qdpi"
-version = "0.0.1"
-description = "QDPi"
+name = "dpdata_qdpi"
+dynamic = ["version"]
+description = "The dpdata plugin for QDPi."
 classifiers = [
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
 ]
-dependencies = ["dpdata", "ase"]
+dependencies = [
+  "dpdata",
+  "ase",
+]
 requires-python = ">=3.7"
 
 [project.urls]
-Homepage = "https://github.com/njzjz/qdpi"
+Homepage = "https://github.com/njzjz/dpdata_qdpi"
 
 [project.entry-points."dpdata.plugins"]
-dftb3 = "qdpi:DFTB3Driver"
-qdpi = "qdpi:QDPiDriver"
+dftb3 = "dpdata_qdpi:DFTB3Driver"
+qdpi = "dpdata_qdpi:QDPiDriver"
 
 [tool.setuptools.package-data]
 qdpi = ["3ob/skfiles/*.skf"]
+
+[tool.setuptools_scm]
