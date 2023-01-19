@@ -2,7 +2,7 @@ from pathlib import Path
 
 import dpdata
 import pytest
-from qdpi import QDPiDriver
+from dpdata_qdpi import QDPiDriver
 from dpdata.plugins.ase import ASEMinimizer
 
 @pytest.fixture
