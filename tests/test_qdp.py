@@ -20,14 +20,14 @@ def qdpi():
     )
     return qdpi
 
-@pytest.skip
+@pytest.skip("skip")
 def test_single_point(ch4, qdpi):
     # single point calculation
     p = ch4.predict(driver=qdpi)
     print("Energies:", p['energies'][0])
     print("Forces:", p['forces'][0])
 
-@pytest.skip
+@pytest.skip("skip")
 def test_optimization(ch4, qdpi):
     # Optimization
     lbfgs = ASEMinimizer(
