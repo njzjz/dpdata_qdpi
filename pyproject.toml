@@ -35,6 +35,6 @@ dftb3 = "dpdata_qdpi.dftb3:DFTB3Driver"
 qdpi = "dpdata_qdpi.qdpi:QDPiDriver"
 
 [tool.setuptools.package-data]
-qdpi = ["3ob/skfiles/*.skf"]
+dpdata_qdpi = ["3ob/skfiles/*.skf"]
 
 [tool.setuptools_scm]
