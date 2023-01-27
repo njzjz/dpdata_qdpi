@@ -18,7 +18,7 @@ At this time, you need to install either [AMBERTools](ambermd.org/) SQM (`sqm`) 
 
 ## Usage
 
-Download the QDπ model from [njzjz/qdpi](https://github.com/njzjz/qdpi).
+Download the QDπ model from [RutgersLBSR/qdpi](https://gitlab.com/RutgersLBSR/qdpi).
 
 ```py
 from dpdata_qdpi import QDPiDriver
