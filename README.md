@@ -8,6 +8,14 @@
 
 ## Installation
 
+If you have installed [DeePMD-kit](https://github.com/deepmodeling/deepmd-kit),
+
+```sh
+pip install dpdata_qdpi
+```
+
+Otherwise, add `gpu` or `cpu` to install DeePMD-kit:
+
 ```sh
 pip install dpdata_qdpi[gpu]
 # or for the CPU version of TensorFlow
@@ -15,6 +23,12 @@ pip install dpdata_qdpi[cpu]
 ```
 
 At this time, you need to install either [AMBERTools](ambermd.org/) SQM (`sqm`) or [DFTB+](https://github.com/dftbplus/dftbplus/) (`dftb+`).
+
+```sh
+conda install ambertools -c conda-forge
+# OR
+conda install dftbplus -c conda-forge
+```
 
 ## Usage
 
