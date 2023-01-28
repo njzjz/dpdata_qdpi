@@ -13,12 +13,17 @@ def ch4():
     return ch4
 
 
-@pytest.fixture
-def qdpi():
+@pytest.fixture(
+    params=[
+        "sqm",
+        "dftb+",
+    ]
+)
+def qdpi(request):
     qdpi = QDPiDriver(
         model="qdpi-1.0.pb",
         charge=0,
-        backend="sqm",
+        backend=request.param,
     )
     return qdpi
 
