@@ -4,7 +4,7 @@ from dpdata.driver import Driver
 @Driver.register("qdpi")
 class QDPiDriver(Driver.get_driver("hybrid")):
     """QDPi.
-    
+
     Parameters
     ----------
     model : str

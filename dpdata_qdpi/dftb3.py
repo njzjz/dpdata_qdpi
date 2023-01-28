@@ -7,7 +7,7 @@ from ase.calculators.dftb import Dftb
 @Driver.register("dftb3")
 class DFTB3Driver(Driver.get_driver("ase")):
     """DFTB3 3ob driven by DFTB+.
-    
+
     Parameters
     ----------
     charge : int
