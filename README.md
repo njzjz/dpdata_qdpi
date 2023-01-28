@@ -1,6 +1,6 @@
 # dpdata_qdpi
 
-[dpdata](https://github.com/deepmodeling/dpdata) plugin for [QDπ](https://github.com/njzjz/qdpi).
+[dpdata](https://github.com/deepmodeling/dpdata) plugin for [QDπ](https://pubs.acs.org/doi/10.1021/acs.jctc.2c01172).
 
 ## Features
 
