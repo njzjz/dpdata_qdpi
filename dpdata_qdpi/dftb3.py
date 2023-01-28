@@ -6,11 +6,22 @@ from ase.calculators.dftb import Dftb
 
 @Driver.register("dftb3")
 class DFTB3Driver(Driver.get_driver("ase")):
-    """DFTB3 3ob driven by DFTB+."""
+    """DFTB3 3ob driven by DFTB+.
 
-    def __init__(self, charge: int = 0) -> None:
+    Parameters
+    ----------
+    charge : int
+        Charge of the system.
+    gpu : bool
+        Whether to use MAGMA Solver for GPU support.
+    """
+
+    def __init__(self, charge: int = 0, gpu: bool = False) -> None:
         # disable OpenMP, which makes DFTB+ slower
         os.environ["OMP_NUM_THREADS"] = "1"
+        kwargs = {}
+        if gpu:
+            kwargs["Hamiltonian_Solver"] = "MAGMA{}"
         slko_dir = os.path.join(os.path.dirname(__file__), "3ob", "skfiles")
         calc = Dftb(
             Hamiltonian_="DFTB",
@@ -29,6 +40,6 @@ class DFTB3Driver(Driver.get_driver("ase")):
             Hamiltonian_charge=charge,
             Hamiltonian_MaxSCCIterations=200,
             slako_dir=os.path.join(slko_dir, ""),
-            Hamiltonian_Solver="MAGMA{}",
+            **kwargs,
         )
         super().__init__(calc)
