@@ -1,7 +1,7 @@
 import os
 
-from dpdata.driver import Driver
 from ase.calculators.dftb import Dftb
+from dpdata.driver import Driver
 
 
 @Driver.register("dftb3")
