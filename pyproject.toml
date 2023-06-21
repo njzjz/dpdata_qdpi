@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0.0", "wheel", "setuptools_scm[toml]>=6.0.1"]
+requires = ["setuptools>=61.0.0", "setuptools_scm[toml]>=6.0.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -22,6 +22,7 @@ readme = "README.md"
 [project.optional-dependencies]
 cpu = ["deepmd-kit[cpu]>=2.2.0b0"]
 gpu = ["deepmd-kit[gpu]>=2.2.0b0"]
+next = ["xtb"]
 test = [
     'pytest',
     'pytest-cov',
@@ -33,6 +34,7 @@ Homepage = "https://github.com/njzjz/dpdata_qdpi"
 [project.entry-points."dpdata.plugins"]
 dftb3 = "dpdata_qdpi.dftb3:DFTB3Driver"
 qdpi = "dpdata_qdpi.qdpi:QDPiDriver"
+qdpiv2 = "dpdata_qdpi.v2:QDPiv2Driver"
 
 [tool.setuptools.package-data]
 dpdata_qdpi = ["3ob/skfiles/*.skf"]
