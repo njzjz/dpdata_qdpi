@@ -22,6 +22,8 @@ class QDPiDriver(Driver.get_driver("hybrid")):
             dftb3 = {"type": "sqm", "qm_theory": "dftb3", "charge": charge, **kwargs}
         elif backend == "dftb+":
             dftb3 = {"type": "dftb3", "charge": charge, **kwargs}
+        elif backend == "dftb+api":
+            dftb3 = {"type": "dftbplusapi/dftb3", "charge": charge, **kwargs}
         else:
             raise ValueError(f"Unknown backend: {backend}")
         super().__init__(

@@ -18,6 +18,7 @@ def ch4():
     params=[
         "sqm",
         "dftb+",
+        "dftb+api",
     ]
 )
 def qdpi(request):
