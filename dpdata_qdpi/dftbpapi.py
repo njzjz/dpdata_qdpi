@@ -5,7 +5,7 @@ import numpy as np
 from ase.calculators.dftb import Dftb
 from dpdata.driver import Driver
 from dpdata.unit import EnergyConversion, ForceConversion, LengthConversion
-from dpdata.xyz.coord_to_xyz import coord_to_xyz
+from dpdata.xyz.xyz import coord_to_xyz
 
 
 @Driver.register("dftbplusapi/dftb3")
