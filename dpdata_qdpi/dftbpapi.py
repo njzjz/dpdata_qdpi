@@ -46,9 +46,9 @@ class DFTBPlusAPIDriver(Driver):
             slako_dir=os.path.join(slko_dir, ""),
             **kwargs,
         )
-        self.length_conversion = LengthConversion("angstrom", "bohr")
-        self.energy_conversion = EnergyConversion("hartree", "eV")
-        self.force_conversion = ForceConversion("hartree/bohr", "eV/angstrom")
+        self.length_conversion = LengthConversion("angstrom", "bohr").value()
+        self.energy_conversion = EnergyConversion("hartree", "eV").value()
+        self.force_conversion = ForceConversion("hartree/bohr", "eV/angstrom").value()
 
     def label(self, data: dict) -> dict:
         import dftbplus
