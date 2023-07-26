@@ -1,11 +1,9 @@
 import os
-import tempfile
 
 import numpy as np
 from ase.calculators.dftb import Dftb
 from dpdata.driver import Driver
 from dpdata.unit import EnergyConversion, ForceConversion, LengthConversion
-from dpdata.xyz.xyz import coord_to_xyz
 
 
 @Driver.register("dftbplusapi/dftb3")
@@ -43,6 +41,10 @@ class DFTBPlusAPIDriver(Driver):
             Hamiltonian_HCorrection_Damping_Exponent=4.0,
             Hamiltonian_charge=charge,
             Hamiltonian_MaxSCCIterations=200,
+            Analysis_="",
+            Analysis_CalculateForces="Yes",
+            Options_="",
+            Options_WriteResultsTag="No",
             slako_dir=os.path.join(slko_dir, ""),
             **kwargs,
         )
@@ -52,28 +54,26 @@ class DFTBPlusAPIDriver(Driver):
 
     def label(self, data: dict) -> dict:
         import dftbplus
+        from dpdata import System
 
-        coords = data["coords"] * self.length_conversion
+        coords = data["coords"].astype(np.float64) * self.length_conversion
         energies = []
         gradients = []
-        types = np.array(data["atom_names"])[data["atom_types"]]
-        with open("geo_end.gen", "w") as f:
-            f.write(coord_to_xyz(data["coords"][0], types))
+        sys0 = System(data=data)[0]
+        atoms = sys0.to_ase_structure()[0]
+        self.calc.atoms = atoms
 
-        with tempfile.NamedTemporaryFile(mode="w") as f:
-            cdftb = dftbplus.DftbPlus(
-                hsdpath=f.name,
-            )
-            self.calc.write_dftb_in(f)
-            for ii in range(coords.shape[0]):
-                cc = coords[ii]
-                cdftb.set_geometry(cc)
-                energy = cdftb.get_energy()
-                gradient = cdftb.get_gradients()
-                energies.append(energy)
-                gradients.append(gradient)
+        self.calc.write_input(atoms)
+        cdftb = dftbplus.DftbPlus()
+        for ii in range(coords.shape[0]):
+            cc = coords[ii]
+            cdftb.set_geometry(cc)
+            energy = cdftb.get_energy()
+            gradient = cdftb.get_gradients()
+            energies.append(energy)
+            gradients.append(gradient)
 
-            cdftb.close()
+        cdftb.close()
         energies = np.array(energies) * self.energy_conversion
         forces = -np.array(gradients) * self.force_conversion
         return {**data, "energies": energies, "forces": forces}
