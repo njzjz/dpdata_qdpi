@@ -33,6 +33,7 @@ Homepage = "https://github.com/njzjz/dpdata_qdpi"
 [project.entry-points."dpdata.plugins"]
 dftb3 = "dpdata_qdpi.dftb3:DFTB3Driver"
 qdpi = "dpdata_qdpi.qdpi:QDPiDriver"
+dftbplusapi = "dpdata_qdpi.dftbpapi:DFTBPlusAPIDriver"
 
 [tool.setuptools.package-data]
 dpdata_qdpi = ["3ob/skfiles/*.skf"]

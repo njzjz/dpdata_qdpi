@@ -27,7 +27,7 @@ At this time, you need to install either [AMBERTools](ambermd.org/) SQM (`sqm`) 
 ```sh
 conda install ambertools -c conda-forge
 # OR
-conda install dftbplus -c conda-forge
+conda install dftbplus dftbplus-python -c conda-forge
 ```
 
 ## Usage
@@ -43,7 +43,7 @@ qdpi = QDPiDriver(
     backend="sqm",
 )
 ```
-`backend` can be either `sqm` or `dftb+`.
+`backend` can be either `sqm`, `dftb+`, or `dftb+api`.
 
 Assume you have an XYZ file `ch4.xyz`
 
