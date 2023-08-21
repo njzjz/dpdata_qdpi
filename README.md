@@ -69,8 +69,8 @@ Perform single point calculation using the QDπ model:
 
 ```py
 p = ch4.predict(driver=qdpi)
-print("Energies:", p['energies'][0])
-print("Forces:", p['forces'][0])
+print("Energies:", p["energies"][0])
+print("Forces:", p["forces"][0])
 ```
 
 ```
@@ -90,9 +90,9 @@ lbfgs = ASEMinimizer(
     driver=qdpi,
 )
 p = ch4.minimize(minimizer=lbfgs)
-print("Coordinates:", p['coords'][0])
-print("Energies:", p['energies'][0])
-print("Forces:", p['forces'][0])
+print("Coordinates:", p["coords"][0])
+print("Energies:", p["energies"][0])
+print("Forces:", p["forces"][0])
 ```
 
 ```
