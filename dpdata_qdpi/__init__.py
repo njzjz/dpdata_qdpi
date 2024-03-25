@@ -1,5 +1,6 @@
 # prevent circular import
 """dpdata plugin for QDPI."""
+
 import dpdata  # noqa:F401
 
 from .dftb3 import DFTB3Driver
