@@ -56,6 +56,8 @@ class DFTBPlusAPIDriver(Driver):
             Analysis_CalculateForces="Yes",
             Options_="",
             Options_WriteResultsTag="No",
+            ParserOptions_="",
+            ParserOptions_ParserVersion=13,
             slako_dir=os.path.join(slko_dir, ""),
             **kwargs,
         )
