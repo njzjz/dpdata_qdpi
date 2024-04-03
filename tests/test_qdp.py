@@ -41,6 +41,7 @@ def test_optimization(ch4, qdpi):
     # Optimization
     lbfgs = ASEMinimizer(
         driver=qdpi,
+        max_steps=1000,
     )
     p = ch4.minimize(minimizer=lbfgs)
     print("Coordinates:", p["coords"][0])
