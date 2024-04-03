@@ -17,13 +17,13 @@ def ch4():
 @pytest.fixture(
     params=[
         "sqm",
+        "dftb+",
         pytest.param(
-            "dftb+",
+            "dftb+api",
             marks=pytest.mark.skip(
-                reason="TODO: wait for https://gitlab.com/ase/ase/-/merge_requests/3282"
+                reason="TODO: broken"
             ),
         ),
-        "dftb+api",
     ]
 )
 def qdpi(request):
