@@ -17,7 +17,7 @@ def ch4():
 @pytest.fixture(
     params=[
         "sqm",
-        "dftb+",
+        pytest.param("dftb+", marks=pytest.mark.skip(reason="TODO: wait for https://gitlab.com/ase/ase/-/merge_requests/3282")),
         "dftb+api",
     ]
 )
