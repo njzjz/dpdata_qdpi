@@ -50,7 +50,6 @@ class DFTB3Driver(Driver.get_driver("ase")):
             Hamiltonian_HCorrection_Damping_Exponent=4.0,
             Hamiltonian_charge=charge,
             Hamiltonian_MaxSCCIterations=200,
-            ParserOptions_="",
             ParserOptions_ParserVersion=13,
             slako_dir=os.path.join(slko_dir, ""),
             **kwargs,
