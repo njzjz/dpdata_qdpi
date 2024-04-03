@@ -1,12 +1,14 @@
 import os
 
+import numpy as np
 from ase.calculators.dftb import Dftb
 from dpdata.driver import Driver
+from dpdata.unit import EnergyConversion, ForceConversion, LengthConversion
 
 
-@Driver.register("dftb3")
-class DFTB3Driver(Driver.get_driver("ase")):
-    """DFTB3 3ob driven by DFTB+.
+@Driver.register("dftbplusapi/dftb3")
+class DFTBPlusAPIDriver(Driver):
+    """DFTB3 3ob driven by DFTB+ API.
 
     Parameters
     ----------
@@ -23,7 +25,7 @@ class DFTB3Driver(Driver.get_driver("ase")):
         if gpu:
             kwargs["Hamiltonian_Solver"] = "MAGMA{}"
         slko_dir = os.path.join(os.path.dirname(__file__), "3ob", "skfiles")
-        calc = Dftb(
+        self.calc = Dftb(
             Hamiltonian_="DFTB",
             Hamiltonian_SCC="Yes",
             # enable DFTB3
@@ -50,7 +52,39 @@ class DFTB3Driver(Driver.get_driver("ase")):
             Hamiltonian_HCorrection_Damping_Exponent=4.0,
             Hamiltonian_charge=charge,
             Hamiltonian_MaxSCCIterations=200,
+            Analysis_="",
+            Analysis_CalculateForces="Yes",
+            Options_="",
+            Options_WriteResultsTag="No",
             slako_dir=os.path.join(slko_dir, ""),
             **kwargs,
         )
-        super().__init__(calc)
+        self.length_conversion = LengthConversion("angstrom", "bohr").value()
+        self.energy_conversion = EnergyConversion("hartree", "eV").value()
+        self.force_conversion = ForceConversion("hartree/bohr", "eV/angstrom").value()
+
+    def label(self, data: dict) -> dict:
+        import dftbplus
+        from dpdata import System
+
+        coords = data["coords"].astype(np.float64) * self.length_conversion
+        energies = []
+        gradients = []
+        sys0 = System(data=data)[0]
+        atoms = sys0.to_ase_structure()[0]
+        self.calc.atoms = atoms
+
+        self.calc.write_input(atoms)
+        cdftb = dftbplus.DftbPlus()
+        for ii in range(coords.shape[0]):
+            cc = coords[ii]
+            cdftb.set_geometry(cc)
+            energy = cdftb.get_energy()
+            gradient = cdftb.get_gradients()
+            energies.append(energy)
+            gradients.append(gradient)
+
+        cdftb.close()
+        energies = np.array(energies) * self.energy_conversion
+        forces = -np.array(gradients) * self.force_conversion
+        return {**data, "energies": energies, "forces": forces}

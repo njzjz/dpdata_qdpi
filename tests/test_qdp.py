@@ -2,8 +2,9 @@ from pathlib import Path
 
 import dpdata
 import pytest
-from dpdata_qdpi import QDPiDriver
 from dpdata.plugins.ase import ASEMinimizer
+
+from dpdata_qdpi import QDPiDriver
 
 
 @pytest.fixture
@@ -17,6 +18,7 @@ def ch4():
     params=[
         "sqm",
         "dftb+",
+        "dftb+api",
     ]
 )
 def qdpi(request):
@@ -39,6 +41,7 @@ def test_optimization(ch4, qdpi):
     # Optimization
     lbfgs = ASEMinimizer(
         driver=qdpi,
+        max_steps=1000,
     )
     p = ch4.minimize(minimizer=lbfgs)
     print("Coordinates:", p["coords"][0])

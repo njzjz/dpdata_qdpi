@@ -27,7 +27,7 @@ At this time, you need to install either [AMBERTools](ambermd.org/) SQM (`sqm`) 
 ```sh
 conda install ambertools -c conda-forge
 # OR
-conda install dftbplus -c conda-forge
+conda install dftbplus dftbplus-python -c conda-forge
 ```
 
 ## Usage
@@ -43,7 +43,7 @@ qdpi = QDPiDriver(
     backend="sqm",
 )
 ```
-`backend` can be either `sqm` or `dftb+`.
+`backend` can be either `sqm`, `dftb+`, or `dftb+api`.
 
 Assume you have an XYZ file `ch4.xyz`
 
@@ -69,8 +69,8 @@ Perform single point calculation using the QDπ model:
 
 ```py
 p = ch4.predict(driver=qdpi)
-print("Energies:", p['energies'][0])
-print("Forces:", p['forces'][0])
+print("Energies:", p["energies"][0])
+print("Forces:", p["forces"][0])
 ```
 
 ```
@@ -90,9 +90,9 @@ lbfgs = ASEMinimizer(
     driver=qdpi,
 )
 p = ch4.minimize(minimizer=lbfgs)
-print("Coordinates:", p['coords'][0])
-print("Energies:", p['energies'][0])
-print("Forces:", p['forces'][0])
+print("Coordinates:", p["coords"][0])
+print("Energies:", p["energies"][0])
+print("Forces:", p["forces"][0])
 ```
 
 ```

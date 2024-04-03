@@ -33,8 +33,37 @@ Homepage = "https://github.com/njzjz/dpdata_qdpi"
 [project.entry-points."dpdata.plugins"]
 dftb3 = "dpdata_qdpi.dftb3:DFTB3Driver"
 qdpi = "dpdata_qdpi.qdpi:QDPiDriver"
+dftbplusapi = "dpdata_qdpi.dftbpapi:DFTBPlusAPIDriver"
 
 [tool.setuptools.package-data]
 dpdata_qdpi = ["3ob/skfiles/*.skf"]
 
 [tool.setuptools_scm]
+
+[tool.ruff]
+select = [
+    "E", # errors
+    "F", # pyflakes
+    "D", # pydocstyle
+    "I", # isort
+    "UP", # pyupgrade
+    "C4", # flake8-comprehensions
+]
+ignore = [
+    "E501", # line too long
+    "E741", # ambiguous variable name
+    "E402", # module level import not at top of file
+    "D413", # missing blank line after last section
+    "D416", # section name should end with a colon
+    "D203", # 1 blank line required before class docstring
+    "D100", # missing docstring in public module
+    "D101", # missing docstring in public class
+    "D102", # missing docstring in public method
+    "D103", # missing docstring in public function
+    "D107", # missing docstring in __init__
+    "D213", # multi-line docstring summary should start at the second line
+    "D205", # 1 blank line required between summary line and description
+]
+
+[tool.ruff.pydocstyle]
+convention = "numpy"
