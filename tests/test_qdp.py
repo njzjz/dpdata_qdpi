@@ -20,9 +20,7 @@ def ch4():
         "dftb+",
         pytest.param(
             "dftb+api",
-            marks=pytest.mark.skip(
-                reason="TODO: broken"
-            ),
+            marks=pytest.mark.skip(reason="TODO: broken"),
         ),
     ]
 )
