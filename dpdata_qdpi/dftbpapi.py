@@ -1,7 +1,6 @@
 import os
 
 import numpy as np
-from ase.calculators.dftb import Dftb
 from dpdata.driver import Driver
 from dpdata.unit import EnergyConversion, ForceConversion, LengthConversion
 
@@ -19,6 +18,8 @@ class DFTBPlusAPIDriver(Driver):
     """
 
     def __init__(self, charge: int = 0, gpu: bool = False) -> None:
+        from ase.calculators.dftb import Dftb
+
         # disable OpenMP, which makes DFTB+ slower
         os.environ["OMP_NUM_THREADS"] = "1"
         kwargs = {}
