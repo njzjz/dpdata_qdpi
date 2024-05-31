@@ -28,6 +28,7 @@ class DFTB3Driver(Driver.get_driver("ase")):
             Hamiltonian_="DFTB",
             Hamiltonian_SCC="Yes",
             # enable DFTB3
+            Hamiltonian_OrbitalResolvedSCC="No",
             Hamiltonian_ThirdOrderFull="Yes",
             Hamiltonian_HubbardDerivs_="",
             # from DOI: 10.1021/ct300849w
